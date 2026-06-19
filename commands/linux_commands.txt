@@ -1,0 +1,39 @@
+# SSH
+sudo apt install openssh-server -y
+sudo systemctl enable ssh
+sudo systemctl start ssh
+systemctl status ssh
+
+# User and Group Management
+sudo groupadd linuxadmins
+sudo useradd -m devops
+sudo useradd -m admin
+sudo usermod -aG linuxadmins devops
+sudo usermod -aG linuxadmins admin
+
+# ACL
+sudo setfacl -m u:admin:rwx /project/project.txt
+getfacl /project/project.txt
+
+# LVM
+sudo pvcreate /dev/sdb
+sudo vgcreate vgdata /dev/sdb
+sudo lvcreate -L 5G -n lvdata vgdata
+sudo mkfs.ext4 /dev/vgdata/lvdata
+sudo mount /dev/vgdata/lvdata /data
+
+# NFS
+sudo apt install nfs-kernel-server -y
+sudo exportfs -ra
+sudo exportfs -v
+
+# Samba
+sudo apt install samba -y
+testparm
+systemctl status smbd
+
+# Git
+git init
+git add .
+git commit -m "Initial commit"
+git push
